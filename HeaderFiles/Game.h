@@ -12,7 +12,7 @@ public:
 
 	int m;
 	int n;
-	std::vector<std::vector<char>> board;
+	char board[6][7];
 
 	Connect4(std::string name1,std::string name2);
 	void GameLoop();

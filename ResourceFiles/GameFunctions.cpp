@@ -5,11 +5,13 @@ Connect4:: Connect4(std::string name1, std::string name2)
 	p1 = new Player(name1, 'X');
 	p2 = new Player(name2, 'O');
 	gameOver = false;
-	m = 6;
-	n = 7;
-	std::vector<std::vector<char>> _board(m, std::vector<char>(n, ' '));
-	this->board = _board;
-
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			board[i][j] = ' ';
+		}
+	}
 	GameLoop();
 }
 
@@ -77,6 +79,7 @@ bool Connect4::BoxFull()
 			return false;
 		}
 	}
+	std::cout << "\nColumn is full.Try another!\n";
 	return true;
 }
 void Connect4::GameWin()
@@ -97,7 +100,7 @@ void Connect4::PlacePiece(int choice, char piece)
 	{
 		return;
 	}
-	for (int i = board.size() - 1; i != 0; i--)
+	for (int i = 5; i >= 0; i--)
 	{
 		if (board[i][choice] == ' ')
 		{
