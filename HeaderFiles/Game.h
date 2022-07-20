@@ -10,8 +10,8 @@ public:
 	int turn;
 	bool gameOver;
 
-	int m;
-	int n;
+	int m=6;
+	int n=7;
 	char board[6][7];
 
 	Connect4(std::string name1,std::string name2);

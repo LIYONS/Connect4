@@ -7,6 +7,7 @@ public:
 	std::string name;
 	char piece;
 
+	Player() {};
 	Player(std::string _name, char _piece)
 	{
 		this->name = _name;

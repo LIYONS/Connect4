@@ -19,45 +19,33 @@ void Connect4::GameLoop()
 {
 	turn = 0;
 	int choice;
+	Player* currentPlayer = new Player();
 
 	while (!gameOver && !BoxFull())
 	{
 		PrintBoard();
 		if (turn % 2 == 0)
 		{
-			std::cout << "\n" << p1->name << " :Input(1-7) :\n";
-			std::cin >> choice;
-			choice--;
-			if (choice <= 6 && choice >= 0)
-			{
-				PlacePiece(choice, p1->piece);
-				if (!gameOver)
-				{
-					turn++;
-				}
-			}
-			else
-			{
-				std::cout << "Invalid Input.Your turn is lost\n";
-			}
+			currentPlayer = p1;
 		}
 		else if (turn % 2 == 1)
 		{
-			std::cout << "\n" << p2->name << " :Input(1-7) :\n";
+			currentPlayer = p2;
+		}
+		std::cout << "\n" << currentPlayer->name << " :Input(1-7) :\n";
+		do
+		{
 			std::cin >> choice;
 			choice--;
-			if (choice <= 6 && choice >= 0)
-			{
-				PlacePiece(choice, p2->piece);
-				if (!gameOver)
-				{
-					turn++;
-				}
-			}
-			else
+			if (choice < 1 || choice >7)
 			{
 				std::cout << "Invalid Input.Your turn is lost\n";
 			}
+		} while (choice < 1 || choice >7);
+		PlacePiece(choice, currentPlayer->piece);
+		if (!gameOver)
+		{
+			turn++;
 		}
 	}
 	if (gameOver)
@@ -66,7 +54,7 @@ void Connect4::GameLoop()
 	}
 	if (BoxFull())
 	{
-		std::cout << "\nBox Full.Can't continue";
+		std::cout << "\nBox Full.Game Draw";
 	}
 
 }
@@ -79,7 +67,6 @@ bool Connect4::BoxFull()
 			return false;
 		}
 	}
-	std::cout << "\nColumn is full.Try another!\n";
 	return true;
 }
 void Connect4::GameWin()
@@ -119,9 +106,10 @@ void Connect4::PrintBoard()
 {
 	for (int i = 0; i < 6; i++)
 	{
+		std::cout << "|";
 		for (int j = 0; j < 7; j++)
 		{
-			std::cout << board[i][j] << " ";
+			std::cout << board[i][j] << " |";
 		}
 		std::cout << std::endl;
 	}
